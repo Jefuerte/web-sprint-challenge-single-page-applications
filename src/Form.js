@@ -84,18 +84,7 @@ const formSubmit = (e) => {
   .catch(err => console.log(err.response));
   setForm(defaultVal)
 };
-const postNewOrder = (newOrder) => {
-  axios
-  .post('https://reqres.in/api/orders ', newOrder)
-  .then((res) => {
-console.log(res.data)
-console.log('post success')
-  setNewOrder(newOrder)
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-}
+
 
 return (
   <div>
