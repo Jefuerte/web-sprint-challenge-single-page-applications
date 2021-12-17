@@ -32,6 +32,8 @@ const [isValid, setIsValid] = useState(true);
 
 const [form, setForm] = useState(defaultVal);
 
+const [newOrder, setNewOrder] = useState(defaultVal)
+
 const [errorState, setError] = useState({
     name: "",
     size: "",
@@ -82,6 +84,18 @@ const formSubmit = (e) => {
   .catch(err => console.log(err.response));
   setForm(defaultVal)
 };
+const postNewOrder = (newOrder) => {
+  axios
+  .post('https://reqres.in/api/orders ', newOrder)
+  .then((res) => {
+console.log(res.data)
+console.log('post success')
+  setNewOrder(newOrder)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
 
 return (
   <div>
@@ -153,11 +167,15 @@ return (
   />
   </form>
 
-  <button name="orderbutton" id="order-button" disabled={isValid} type="submit">
+  <button name="order-button" id="order-button" disabled={isValid} type="submit">
     Confirm Order
   </button>
-
-
+  <div className='order-confirmation'>
+    <h2>{form.name} your order has been confirmed!</h2>
+    <p>Name: {form.name}</p>
+    <p>Special Instructions: {form.special}</p>
+  
+</div>
 </div>
 );
 
